@@ -1,0 +1,16 @@
+
+Create WebSocket server for King Hermes Dashboard.
+
+REQUIREMENTS:
+1. HTTP + WebSocket server on port 8080
+2. Real system metrics from /proc/stat, /proc/meminfo, /proc/loadavg
+3. Agent process monitoring via ps aux
+4. Agent spawning:
+   - opencode: spawn 'opencode run <prompt>'
+   - gemini: spawn '/snap/bin/gemini -p <prompt>'
+   - claude: use Fireworks API with key fw_SW2LkiVRsBt4mH4Qwk9Swf
+5. Stream agent output back to clients in real-time
+6. File: /workspace/supreme-king/server/websocket-server.js
+7. Must have /api/metrics endpoint returning JSON
+
+MUST WORK with real Ubuntu data.

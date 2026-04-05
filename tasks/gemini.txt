@@ -1,0 +1,18 @@
+
+Create EPIC 3D background for King Hermes Dashboard using Three.js.
+
+REQUIREMENTS:
+1. Particle system with 3000+ gold particles (#FFD700)
+2. Floating agent orbs that orbit around center:
+   - OpenCode (green #00FF88) at position (-8, 0, 0)
+   - Gemini (cyan #4ECDC4) at position (8, 0, 0)
+   - OpenClaude (red #FF6B6B) at position (0, 8, 0)
+   - Roo (purple #9B59B6) at position (0, -8, 0)
+3. Center King Hermes sphere (gold #FFD700) with glow effect
+4. Connection lines between center and each agent
+5. Stars background with 5000 stars
+6. Dark space background (#050505)
+7. Use @react-three/fiber and @react-three/drei
+8. File: /workspace/supreme-king/components/Scene3D.tsx
+
+MUST WORK without errors. Test bufferGeometry usage.

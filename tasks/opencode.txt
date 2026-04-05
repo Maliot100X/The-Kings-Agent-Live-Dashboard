@@ -1,0 +1,21 @@
+
+Create Next.js dashboard UI for King Hermes.
+
+REQUIREMENTS:
+1. Next.js 14 with TypeScript, Tailwind CSS
+2. 6 working tabs: Agents, System, Tasks, Chat, Logs, Settings
+3. Real-time WebSocket connection to ws://localhost:8080
+4. Floating King Hermes bot (bottom right, gold crown)
+5. Use framer-motion for animations
+6. Use recharts for system charts
+7. Dark theme (#050505 background, gold #FFD700 accents)
+8. File structure:
+   - /workspace/supreme-king/dashboard/app/page.tsx
+   - /workspace/supreme-king/dashboard/app/layout.tsx
+   - /workspace/supreme-king/dashboard/components/AgentsTab.tsx
+   - /workspace/supreme-king/dashboard/components/SystemTab.tsx
+   - /workspace/supreme-king/dashboard/components/ChatTab.tsx
+   - /workspace/supreme-king/dashboard/components/FloatingBot.tsx
+
+MUST integrate with Scene3D component for 3D background.
+MUST NOT have white screen - 3D must render!

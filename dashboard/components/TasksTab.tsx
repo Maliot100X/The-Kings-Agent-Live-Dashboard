@@ -16,9 +16,9 @@ const statusConfig = {
 };
 
 const priorityConfig = {
-  low: { color: 'text-gray-400', bg: 'bg-gray-500/20' },
-  medium: { color: 'text-blue-400', bg: 'bg-blue-500/20' },
-  high: { color: 'text-orange-400', bg: 'bg-orange-500/20' },
+  low: { color: 'text-gray-400', bg: 'bg-gray-500/20', icon: Clock },
+  medium: { color: 'text-blue-400', bg: 'bg-blue-500/20', icon: Clock },
+  high: { color: 'text-orange-400', bg: 'bg-orange-500/20', icon: AlertTriangle },
   critical: { color: 'text-red-400', bg: 'bg-red-500/20', icon: AlertTriangle },
 };
 

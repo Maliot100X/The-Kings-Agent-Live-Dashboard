@@ -5,8 +5,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Agent Swarm Dashboard - Supreme Control Center',
-  description: 'Real-time agent swarm orchestration dashboard with 3D visualization',
+  title: 'King Hermes - AI Orchestrator Dashboard',
+  description: 'Sovereign 3D dashboard for AI agent orchestration',
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-dark-900 text-white antialiased`}>
+      <body className={`${inter.className} bg-[#050505] text-[#FFD700] overflow-x-hidden`}>
         {children}
       </body>
     </html>

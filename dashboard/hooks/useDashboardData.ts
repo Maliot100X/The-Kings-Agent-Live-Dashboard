@@ -184,7 +184,7 @@ export function useDashboardData() {
     },
   ]);
 
-  const addChatMessage = useCallback((role: 'user' | 'assistant', content: string) => {
+  const addChatMessage = useCallback((role: 'user' | 'assistant' | 'system', content: string) => {
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
       role,

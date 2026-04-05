@@ -1,22 +1,44 @@
 const WebSocket = require('ws');
+const http = require('http');
 const { spawn, exec } = require('child_process');
 const fs = require('fs');
 const https = require('https');
 
 // Configuration
 const PORT = 8080;
-const FIREWORKS_API_KEY = process.env.FIREWORKS_API_KEY || '';
+const FIREWORKS_API_KEY = process.env.FIREWORKS_API_KEY || 'fw_SW2LkiVRsBt4mH4Qwk9Swf';
 const FIREWORKS_API_URL = 'https://api.fireworks.ai/inference/v1/chat/completions';
-const FIREWORKS_MODEL = 'accounts/fireworks/models/claude-3-opus-20240229';
+const FIREWORKS_MODEL = 'accounts/fireworks/routers/kimi-k2p5-turbo';
 
 // Store active agent processes
 const activeAgents = new Map();
 
-// Create WebSocket server
-const wss = new WebSocket.Server({ port: PORT });
+// Create HTTP server for API endpoints
+const httpServer = http.createServer((req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Content-Type', 'application/json');
+  
+  if (req.url === '/api/health') {
+    res.end(JSON.stringify({ status: 'ok', king: 'hermes' }));
+  } else if (req.url === '/api/metrics') {
+    // Return system metrics
+    const metrics = getSystemMetrics();
+    const agents = getAgentStatus();
+    res.end(JSON.stringify({ system: metrics, agents }));
+  } else {
+    res.statusCode = 404;
+    res.end(JSON.stringify({ error: 'not found' }));
+  }
+});
 
-console.log(`🚀 King Hermes WebSocket Server running on port ${PORT}`);
-console.log(`📡 Waiting for connections...`);
+// Create WebSocket server attached to HTTP server
+const wss = new WebSocket.Server({ server: httpServer });
+
+httpServer.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 King Hermes WebSocket Server running on port ${PORT}`);
+  console.log(`📡 Waiting for connections...`);
+  console.log(`📊 API: http://0.0.0.0:${PORT}/api/metrics`);
+});
 
 // Handle connections
 wss.on('connection', (ws, req) => {
@@ -666,6 +688,41 @@ process.on('SIGINT', () => {
     process.exit(0);
   });
 });
+
+// Get system metrics for HTTP API
+function getSystemMetrics() {
+  return {
+    timestamp: Date.now(),
+    cpu: readCpuMetrics(),
+    memory: readMemoryMetrics(),
+    loadAverage: readLoadAverage(),
+    uptime: readUptime(),
+    activeAgents: activeAgents.size
+  };
+}
+
+// Get agent status for HTTP API
+function getAgentStatus() {
+  const agents = [
+    { name: 'opencode', displayName: 'OpenCode', color: '#00FF88' },
+    { name: 'gemini', displayName: 'Gemini', color: '#4ECDC4' },
+    { name: 'claude', displayName: 'OpenClaude', color: '#FF6B6B' },
+    { name: 'roo', displayName: 'Roo Code', color: '#9B59B6' },
+    { name: 'kimi', displayName: 'Kimi', color: '#FFD700' }
+  ];
+  
+  // Check which agents are currently running
+  const runningTypes = new Set();
+  for (const [_, agent] of activeAgents.entries()) {
+    runningTypes.add(agent.type);
+  }
+  
+  return agents.map(agent => ({
+    ...agent,
+    status: runningTypes.has(agent.name) ? 'online' : 'offline',
+    pid: null // We could add PID tracking if needed
+  }));
+}
 
 console.log('✅ King Hermes WebSocket Server initialized');
 console.log('📊 System metrics broadcasting every 5 seconds');

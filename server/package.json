@@ -1,0 +1,21 @@
+{
+  "name": "king-hermes-websocket-server",
+  "version": "1.0.0",
+  "description": "WebSocket server for King Hermes Dashboard with real agent spawning",
+  "main": "websocket-server.js",
+  "scripts": {
+    "start": "node websocket-server.js",
+    "dev": "node websocket-server.js"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  },
+  "keywords": [
+    "websocket",
+    "agents",
+    "king-hermes",
+    "dashboard"
+  ],
+  "author": "King Hermes",
+  "license": "MIT"
+}
